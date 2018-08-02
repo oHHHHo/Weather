@@ -3,6 +3,8 @@ package lyp.com.weather;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -13,12 +15,16 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+    private ImageView updateBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+
+        updateBtn = findViewById(R.id.title_city_update);
+        updateBtn.setOnClickListener(this);
 
         //检查网络链接状态
         if(CheckNet.getNetState(this) == CheckNet.NET_NONE) {
@@ -28,8 +34,6 @@ public class MainActivity extends AppCompatActivity {
             Log.d("WEATHER","网络OK");
             Toast.makeText(this, "网络OK", Toast.LENGTH_SHORT).show();
         }
-
-        getWeatherDatafromNet("101010100");
 
     }
 
@@ -62,5 +66,12 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }).start();
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == R.id.title_city_update) {
+            getWeatherDatafromNet("101010100");
+        }
     }
 }
