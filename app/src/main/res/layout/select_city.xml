@@ -28,10 +28,36 @@
             android:gravity="center">
         </TextView>
     </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/selectcity_search_rela"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_below="@id/selectcity_title">
+
+        <EditText
+            android:id="@+id/selectcity_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint=" 搜索全国城市"
+            android:paddingLeft="35dp"
+            android:singleLine="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"/>
+        <Button
+            android:id="@+id/selectcity_search_btn"
+            android:layout_marginBottom="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Search"
+            android:layout_alignRight="@id/selectcity_search"/>
+
+    </RelativeLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/selectcity_title">
+        android:layout_below="@id/selectcity_search_rela">
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
