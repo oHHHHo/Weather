@@ -2,6 +2,7 @@ package lyp.com.weather;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -78,6 +79,13 @@ public class SelectCity extends Activity implements View.OnClickListener {
                 Intent intent = new Intent();
                 intent.putExtra("result", code);
                 SelectCity.this.setResult(RESULT_OK, intent);
+
+                //用SharePreference 存储最近一次的citycode
+                SharedPreferences sp = getSharedPreferences("cityCodePreference", Activity.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putInt("cityCode", code);
+                editor.commit();
+
                 checkedCityCode = 0;
                 finish();
             }

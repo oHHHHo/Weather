@@ -1,6 +1,8 @@
 package lyp.com.weather;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -61,7 +63,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.title_city_update) {
-            getWeatherDatafromNet("101010100");
+            SharedPreferences sp = getSharedPreferences("cityCodePreference", Activity.MODE_PRIVATE);
+            int code = sp.getInt("cityCode", 0);
+            if (code != 0) {
+                getWeatherDatafromNet(code+"");
+            } else {
+                getWeatherDatafromNet("101010100");
+            }
         }
         if (v.getId() == R.id.title_city_manager) {
             Intent intent = new Intent(this, SelectCity.class);
