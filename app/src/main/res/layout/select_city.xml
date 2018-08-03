@@ -6,7 +6,8 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="45.0dp"
-        android:background="#000000">
+        android:background="#000000"
+        android:id="@+id/selectcity_title">
         <ImageView
             android:id="@+id/title_selectCity_back"
             android:layout_width="45.0dp"
@@ -26,5 +27,15 @@
             android:textSize="25.0sp"
             android:gravity="center">
         </TextView>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/selectcity_title">
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/selectcity_lv">
+        </ListView>
     </RelativeLayout>
 </RelativeLayout>

@@ -83,7 +83,7 @@ public class MyApplication extends Application {
         }).start();
     }
 
-    private List<City> getCityList() {
+    public List<City> getCityList() {
         return cityList;
     }
 }

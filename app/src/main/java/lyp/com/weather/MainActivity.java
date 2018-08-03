@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if (v.getId() == R.id.title_city_manager) {
             Intent intent = new Intent(this, SelectCity.class);
-            startActivity(intent);
+            startActivityForResult(intent, 1234);
         }
     }
 
@@ -351,4 +351,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toast.makeText(MainActivity.this,"更新成功",Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1234 && resultCode == RESULT_OK) {
+            String cityCode = data.getExtras().getInt("result") + "";
+            getWeatherDatafromNet(cityCode);
+        }
+    }
 }
