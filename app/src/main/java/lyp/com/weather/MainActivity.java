@@ -1,5 +1,6 @@
 package lyp.com.weather;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //title
     private ImageView updateBtn;
+    private ImageView selectCityBtn;
 
     //todayweather
     private TextView cityNameT, cityT, timeT, humidityT, weekT, pmDataT, pmQualityT, temperatureT,
@@ -39,6 +41,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         updateBtn = findViewById(R.id.title_city_update);
         updateBtn.setOnClickListener(this);
+        selectCityBtn = findViewById(R.id.title_city_manager);
+        selectCityBtn.setOnClickListener(this);
+
         initView();
 
         //检查网络链接状态
@@ -54,8 +59,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.title_city_update) {
+        if (v.getId() == R.id.title_city_update) {
             getWeatherDatafromNet("101010100");
+        }
+        if (v.getId() == R.id.title_city_manager) {
+            Intent intent = new Intent(this, SelectCity.class);
+            startActivity(intent);
         }
     }
 
