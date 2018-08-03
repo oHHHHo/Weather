@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        Log.d("MainActivity", "Oncreate");
 
         updateBtn = findViewById(R.id.title_city_update);
         updateBtn.setOnClickListener(this);
