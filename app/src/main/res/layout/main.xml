@@ -56,7 +56,7 @@
 
 
     <RelativeLayout
-        android:id="@+id/today_relative"
+        android:id="@+id/today_relative1"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
 
@@ -69,7 +69,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <LinearLayout
-                android:id="@+id/todayinfo1_linear1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -146,31 +145,29 @@
             android:id="@+id/todayinfo2_relative"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-
             android:layout_below="@id/todayinfo1_relative">
             <LinearLayout
-                android:id="@+id/todayinfo2_linear1"
+                android:id="@+id/todayinfo1_linear1"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/todayinfo2_weatherStatusImg"
+                    android:id="@+id/todayinfo1_weatherStatusImg"
                     android:layout_width="155dp"
                     android:layout_height="128dp"
 
                     android:src="@drawable/weather_qing"/>
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/todayinfo2_linear2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
 
-                android:layout_toRightOf="@id/todayinfo2_linear1">
+                android:layout_toRightOf="@id/todayinfo1_linear1">
 
                 <TextView
-                    android:id="@+id/todayinfo2_week"
+                    android:id="@+id/todayinfo1_week"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
@@ -179,7 +176,7 @@
                     android:textSize="27.0sp">
                 </TextView>
                 <TextView
-                    android:id="@+id/todayinfo2_temperature"
+                    android:id="@+id/todayinfo1_temperature"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
 
@@ -188,7 +185,7 @@
                     android:textSize="20.0sp">
                 </TextView>
                 <TextView
-                    android:id="@+id/todayinfo2_weatherState"
+                    android:id="@+id/todayinfo1_weatherState"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
 
@@ -197,7 +194,7 @@
                     android:textSize="20.0sp">
                 </TextView>
                 <TextView
-                    android:id="@+id/todayinfo2_wind"
+                    android:id="@+id/todayinfo1_wind"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
 
@@ -207,5 +204,131 @@
                 </TextView>
             </LinearLayout>
         </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/today_relative3"
+            android:paddingTop="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/todayinfo2_relative"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/future1_no1_week"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="今天 星期三"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15.0sp">
+                </TextView>
+                <TextView
+                    android:id="@+id/future1_no1_temperature"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="2摄氏度"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15.0sp">
+                </TextView>
+                <TextView
+                    android:id="@+id/future1_no1_weatherstate"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="晴"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15.0sp">
+                </TextView>
+                <TextView
+                    android:id="@+id/future1_no1_wind"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="微风"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15.0sp">
+                </TextView>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/future2_no1_week"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="今天 星期三"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15.0sp">
+                </TextView>
+                <TextView
+                    android:id="@+id/future2_no1_temperature"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="2摄氏度"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15.0sp">
+                </TextView>
+                <TextView
+                    android:id="@+id/future2_no1_weatherstate"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="晴"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15.0sp">
+                </TextView>
+                <TextView
+                    android:id="@+id/future2_no1_wind"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="微风"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15.0sp">
+                </TextView>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/future3_no1_week"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="今天 星期三"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15.0sp">
+                </TextView>
+                <TextView
+                    android:id="@+id/future3_no1_temperature"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="2摄氏度"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15.0sp">
+                </TextView>
+                <TextView
+                    android:id="@+id/future3_no1_weatherstate"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="晴"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15.0sp">
+                </TextView>
+                <TextView
+                    android:id="@+id/future3_no1_wind"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="微风"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15.0sp">
+                </TextView>
+            </LinearLayout>
+        </LinearLayout>
     </RelativeLayout>
+
 </RelativeLayout>
