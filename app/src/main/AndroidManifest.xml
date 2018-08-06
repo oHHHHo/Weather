@@ -41,7 +41,7 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="Mtmf5UMcgG3QGqivFRNg7ddGIPiF0qey" >
         </meta-data>
-        <activity android:name=".util.Locate">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -49,6 +49,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".SelectCity"/>
+        <activity android:name=".util.Locate"/>
         <service android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":remote">

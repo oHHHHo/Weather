@@ -23,11 +23,14 @@ import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import lyp.com.weather.util.Locate;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     //title
     private ImageView updateBtn;
     private ImageView selectCityBtn;
+    private ImageView locateBtn;
 
     //todayweather
     private TextView cityNameT, cityT, timeT, humidityT, weekT, pmDataT, pmQualityT, temperatureT,
@@ -49,6 +52,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         updateBtn.setOnClickListener(this);
         selectCityBtn = findViewById(R.id.title_city_manager);
         selectCityBtn.setOnClickListener(this);
+        locateBtn = findViewById(R.id.title_city_locate);
+        locateBtn.setOnClickListener(this);
 
         initView();
 
@@ -77,6 +82,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (v.getId() == R.id.title_city_manager) {
             Intent intent = new Intent(this, SelectCity.class);
             startActivityForResult(intent, 1234);
+        }
+        if (v.getId() == R.id.title_city_locate) {
+            Intent intent = new Intent(this, Locate.class);
+            startActivityForResult(intent, 2345);
         }
     }
 
@@ -468,9 +477,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1234 && resultCode == RESULT_OK) {
-            String cityCode = data.getExtras().getInt("result") + "";
-            getWeatherDatafromNet(cityCode);
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case 1234:
+                case 2345:
+                    String cityCode = data.getExtras().getInt("result") + "";
+                    getWeatherDatafromNet(cityCode);
+                    break;
+                default:
+                    break;
+
+
+            }
         }
     }
 }

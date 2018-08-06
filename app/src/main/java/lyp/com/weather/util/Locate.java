@@ -2,6 +2,8 @@ package lyp.com.weather.util;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,6 +11,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
@@ -26,7 +29,9 @@ import com.baidu.mapapi.model.LatLng;
 import java.util.ArrayList;
 import java.util.List;
 
+import lyp.com.weather.MyApplication;
 import lyp.com.weather.R;
+import lyp.com.weather.SelectCity;
 
 /**
  * Created by liyp on 18-8-6.
@@ -37,9 +42,14 @@ public class Locate extends Activity {
     private LocationClient locationClient;
     private MyLocationListener locationListener;
     private TextView info;
+    private Button ok;
     private MapView mapView;
     private BaiduMap baiduMap;
     private boolean  isFirstLocate = true;
+
+    private MyApplication myApplication;
+    private List<City> mCityList;
+    private String cityName;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,16 +75,45 @@ public class Locate extends Activity {
         }
 
         info = findViewById(R.id.locate_info);
+        ok = findViewById(R.id.ok);
         mapView = findViewById(R.id.map_bd);
         baiduMap = mapView.getMap();
         baiduMap.setMyLocationEnabled(true);
         requestLocation();
         mapView.setVisibility(View.GONE);
 
+        myApplication = (MyApplication) MyApplication.getInstance();
+        mCityList = myApplication.getCityList();
+
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mapView.setVisibility(View.VISIBLE);
+            }
+        });
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int locateCityCode = 0;
+                for (int i = 0; i < mCityList.size(); i++) {
+                    String city = mCityList.get(i).getCity();
+                    if (cityName != null && cityName.contains(city)) {
+                        String number = mCityList.get(i).getNumber();
+                        locateCityCode = Integer.parseInt(number);
+                        Log.e("SSSS",locateCityCode+"");
+                        break;
+                    }
+                }
+                Intent intent = new Intent();
+                intent.putExtra("result", locateCityCode);
+                Locate.this.setResult(RESULT_OK, intent);
+
+                //用SharePreference 存储最近一次的citycode
+                SharedPreferences sp = getSharedPreferences("cityCodePreference", Activity.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putInt("cityCode", locateCityCode);
+                editor.commit();
+                finish();
             }
         });
 
@@ -119,6 +158,8 @@ public class Locate extends Activity {
                 currentPosition.append("网络");
             }
             info.setText(currentPosition);
+            cityName = bdLocation.getCity();
+            ok.setText(cityName);
 
 
             if(bdLocation.getLocType() == BDLocation.TypeGpsLocation ||bdLocation.getLocType() == BDLocation.TypeNetWorkLocation){

@@ -67,10 +67,10 @@ public class MyApplication extends Application {
 
     private boolean prepareCityList() {
         cityList = mCityDB.getCityList();
-        for (City city : cityList) {
+/*        for (City city : cityList) {
             String cityName = city.getCity();
             Log.d("CityDB",cityName);
-        }
+        }*/
         return true;
     }
 
