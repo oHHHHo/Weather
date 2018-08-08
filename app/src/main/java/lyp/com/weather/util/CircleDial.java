@@ -1,14 +1,19 @@
 package lyp.com.weather.util;
 
-import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Shader;
-import android.graphics.SweepGradient;
-import android.text.TextPaint;
-import android.util.AttributeSet;
-import android.view.View;
+
+        import android.content.Context;
+        import android.graphics.Bitmap;
+        import android.graphics.Canvas;
+        import android.graphics.Color;
+        import android.graphics.Paint;
+        import android.graphics.Shader;
+        import android.graphics.SweepGradient;
+        import android.graphics.drawable.BitmapDrawable;
+        import android.text.TextPaint;
+        import android.util.AttributeSet;
+        import android.view.View;
+
+        import lyp.com.weather.R;
 
 /**
  #         ┌─┐       ┌─┐
@@ -49,6 +54,9 @@ public class CircleDial extends View {
     private int startTem = 25,stopTem = 35;
     //中心实时温度 默认情况下为28
     private int centerTemper = 28;
+
+    private int girlBitWidth , girlBitHeight;
+    private Bitmap girlBitmap;
 
     public CircleDial(Context context) {
         this(context,null);
@@ -190,7 +198,7 @@ public class CircleDial extends View {
         drawStartTem(canvas);
         drawNowTem(canvas);
         drawStopTem(canvas);
-
+        drawWeather(canvas);
         canvas.restore();
     }
 
@@ -251,6 +259,13 @@ public class CircleDial extends View {
     private void drawStopTem(Canvas canvas) {
         mTextPaint.setTextSize(r * 0.1f);
         canvas.drawText(stopTem + "°", calculateX(r * 1.1f, stopAngle), calculateY(r * 1.1f, stopAngle), mTextPaint);
+    }
+
+    private void drawWeather(Canvas canvas) {
+        girlBitmap = ((BitmapDrawable)getResources().getDrawable(R.drawable.qing)).getBitmap();
+        girlBitWidth = girlBitmap.getWidth();
+        girlBitHeight = girlBitmap.getHeight();
+        canvas.drawBitmap(girlBitmap, centerX - (girlBitWidth/2), centerY + r - (girlBitHeight*2/3), null);
     }
 
     @Override
