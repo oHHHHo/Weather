@@ -55,8 +55,8 @@ public class CircleDial extends View {
     //中心实时温度 默认情况下为28
     private int centerTemper = 28;
 
-    private int girlBitWidth , girlBitHeight;
-    private Bitmap girlBitmap;
+    private int bitWidth , bitHeight;
+    private Bitmap weatherImg;
 
     public CircleDial(Context context) {
         this(context,null);
@@ -145,6 +145,10 @@ public class CircleDial extends View {
         this.startTem = startTem;
         this.stopTem = stopTem;
         invalidate();
+    }
+
+    public void setWeatherImg(Bitmap weatherImg) {
+        this.weatherImg = weatherImg;
     }
 
     @Override
@@ -262,10 +266,11 @@ public class CircleDial extends View {
     }
 
     private void drawWeather(Canvas canvas) {
-        girlBitmap = ((BitmapDrawable)getResources().getDrawable(R.drawable.qing)).getBitmap();
-        girlBitWidth = girlBitmap.getWidth();
-        girlBitHeight = girlBitmap.getHeight();
-        canvas.drawBitmap(girlBitmap, centerX - (girlBitWidth/2), centerY + r - (girlBitHeight*2/3), null);
+        if (weatherImg != null) {
+            bitWidth = weatherImg.getWidth();
+            bitHeight = weatherImg.getHeight();
+            canvas.drawBitmap(weatherImg, centerX - (bitWidth/2), centerY + r - (bitHeight*2/3), null);
+        }
     }
 
     @Override

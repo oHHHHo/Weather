@@ -3,6 +3,7 @@ package lyp.com.weather;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -371,6 +372,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mCircleDial.setAngle(nowTemp);
         mCircleDial.setMinMaxTem(lowTemp, highTemp);
         mCircleDial.setCenterTemper(nowTemp);
+        mCircleDial.setWeatherImg(((BitmapDrawable)getResources().getDrawable(R.drawable.qing)).getBitmap());
 
         Toast.makeText(MainActivity.this,"更新成功",Toast.LENGTH_SHORT).show();
 
