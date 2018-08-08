@@ -23,40 +23,44 @@ import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import lyp.com.weather.util.CircleDial;
 import lyp.com.weather.util.Locate;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     //title
     private ImageView updateBtn;
-    private ImageView selectCityBtn;
     private ImageView locateBtn;
+    private ImageView menuBtn;
 
     //todayweather
-    private TextView cityNameT, cityT, timeT, humidityT, weekT, pmDataT, pmQualityT, temperatureT,
-            climateT, windT;
-    private ImageView weatherImg, pmStateImg;
+    // 城市 发布时间 湿度 周几 pm数据 空气质量 温度 天气状况 风力
+    private TextView cityT, timeT, weekT, windT, weatherInfo;
+    private ImageView weatherImg;
+
     //future
     private TextView week1T, temperature1T, climate1T, wind1T, week2T, temperature2T, climate2T, wind2T,
             week3T, temperature3T, climate3T, wind3T;
 
     private TodayWeather todayWeather;
+    private CircleDial mCircleDial;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.miui);
         Log.d("MainActivity", "Oncreate");
 
         if (getSupportActionBar() != null){
             getSupportActionBar().hide();
         }
 
-        updateBtn = findViewById(R.id.title_city_update);
+        mCircleDial =  findViewById(R.id.temp_line_dial);
+        updateBtn = findViewById(R.id.title_setting);
         updateBtn.setOnClickListener(this);
-        selectCityBtn = findViewById(R.id.title_city_manager);
-        selectCityBtn.setOnClickListener(this);
-        locateBtn = findViewById(R.id.title_city_locate);
+        menuBtn = findViewById(R.id.title_menu);
+        menuBtn.setOnClickListener(this);
+        locateBtn = findViewById(R.id.title_locate);
         locateBtn.setOnClickListener(this);
 
         initView();
@@ -74,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.title_city_update) {
+        if (v.getId() == R.id.title_setting) {
             SharedPreferences sp = getSharedPreferences("cityCodePreference", Activity.MODE_PRIVATE);
             int code = sp.getInt("cityCode", 0);
             if (code != 0) {
@@ -83,11 +87,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 getWeatherDatafromNet("101010100");
             }
         }
-        if (v.getId() == R.id.title_city_manager) {
+        if (v.getId() == R.id.title_menu) {
             Intent intent = new Intent(this, SelectCity.class);
             startActivityForResult(intent, 1234);
         }
-        if (v.getId() == R.id.title_city_locate) {
+        if (v.getId() == R.id.title_locate) {
             Intent intent = new Intent(this, Locate.class);
             startActivityForResult(intent, 2345);
         }
@@ -95,33 +99,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initView() {
 
-        //title
-        cityNameT = findViewById(R.id.title_city_name);
-
         //today weather
-        cityT = findViewById(R.id.todayinfo1_cityName);
-        timeT = findViewById(R.id.todayinfo1_updateTime);
-        humidityT = findViewById(R.id.todayinfo1_humidity);
-        weekT = findViewById(R.id.todayinfo1_week);
-        pmDataT = findViewById(R.id.todayinfo1_pm25);
-        pmQualityT = findViewById(R.id.todayinfo1_pm25status);
-        temperatureT = findViewById(R.id.todayinfo1_temperature);
-        climateT = findViewById(R.id.todayinfo1_weatherState);
-        windT = findViewById(R.id.todayinfo1_wind);
-
+        cityT = findViewById(R.id.title_locate_text);
+        timeT = findViewById(R.id.update_time);
+        weekT = findViewById(R.id.today_week);
+//        windT = findViewById(R.id.todayinfo1_wind);
+        weatherInfo = findViewById(R.id.weather_info);
         weatherImg = findViewById(R.id.todayinfo1_weatherStatusImg);
-        pmStateImg = findViewById(R.id.todayinfo1_pm25img);
 
-        cityNameT.setText("N/A");
         cityT.setText("N/A");
         timeT.setText("N/A");
-        humidityT.setText("N/A");
         weekT.setText("N/A");
-        pmDataT.setText("N/A");
-        pmQualityT.setText("N/A");
-        temperatureT.setText("N/A");
-        climateT.setText("N/A");
-        windT.setText("N/A");
+//        windT.setText("N/A");
+        weatherInfo.setText("N/A");
 
         //future
         week1T = findViewById(R.id.future1_no1_week);
@@ -368,33 +358,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void updateTodayWeather(TodayWeather todayWeather) {
 
-        cityNameT.setText(todayWeather.getCity()+"天气");
         cityT.setText(todayWeather.getCity());
         timeT.setText(todayWeather.getUpdatetime());
-        humidityT.setText("湿度:"+todayWeather.getShidu());
-        pmDataT.setText(todayWeather.getPm25());
-        pmQualityT.setText(todayWeather.getQuality());
         weekT.setText(todayWeather.getDate());
-        temperatureT.setText(todayWeather.getHigh()+"~"+todayWeather.getLow());
-        climateT.setText(todayWeather.getType());
-        windT.setText("风力:"+todayWeather.getFengli());
+//        windT.setText("风力:"+todayWeather.getFengli());
+        weatherInfo.setText(todayWeather.getType() + " |  空气" + todayWeather.getQuality()
+                + " |  湿度：" + todayWeather.getShidu());
+
+        int nowTemp = Integer.parseInt(todayWeather.getWendu());
+        int lowTemp = Integer.parseInt(todayWeather.getLow().substring(3, 5));
+        int highTemp = Integer.parseInt(todayWeather.getHigh().substring(3, 5));
+        mCircleDial.setAngle(nowTemp);
+        mCircleDial.setMinMaxTem(lowTemp, highTemp);
+        mCircleDial.setCenterTemper(nowTemp);
+
         Toast.makeText(MainActivity.this,"更新成功",Toast.LENGTH_SHORT).show();
 
-        if (todayWeather.getPm25() != null) {
-            int pm25 = Integer.parseInt(todayWeather.getPm25());
-            if (pm25 <= 50) {
-                pmStateImg.setImageResource(R.drawable.biz_plugin_weather_0_50);
-            } else if (pm25 >= 51 && pm25 <= 100) {
-                pmStateImg.setImageResource(R.drawable.biz_plugin_weather_51_100);
-            } else if (pm25 >= 101 && pm25 <= 150) {
-                pmStateImg.setImageResource(R.drawable.biz_plugin_weather_101_150);
-            } else if (pm25 >= 151 && pm25 <= 200) {
-                pmStateImg.setImageResource(R.drawable.biz_plugin_weather_151_200);
-            } else if (pm25 >= 201 && pm25 <= 300) {
-                pmStateImg.setImageResource(R.drawable.biz_plugin_weather_201_300);
-            }
-        }
-        if (todayWeather.getType() != null) {
+        /*if (todayWeather.getType() != null) {
             Log.d("type", todayWeather.getType());
             switch (todayWeather.getType()) {
                 case "晴":
@@ -460,14 +440,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 default:
                     break;
             }
-        }
+        }*/
 
         week1T.setText(todayWeather.getDate1());
         week2T.setText(todayWeather.getDate2());
         week3T.setText(todayWeather.getDate3());
-        temperature1T.setText(todayWeather.getHigh1()+"~"+todayWeather.getLow1());
-        temperature2T.setText(todayWeather.getHigh2()+"~"+todayWeather.getLow2());
-        temperature3T.setText(todayWeather.getHigh3()+"~"+todayWeather.getLow3());
+        temperature1T.setText(todayWeather.getHigh1().substring(3,6)+"/"+todayWeather.getLow1().substring(3,6));
+        temperature2T.setText(todayWeather.getHigh2().substring(3,6)+"/"+todayWeather.getLow2().substring(3,6));
+        temperature3T.setText(todayWeather.getHigh3().substring(3,6)+"/"+todayWeather.getLow3().substring(3,6));
         climate1T.setText(todayWeather.getType1());
         climate2T.setText(todayWeather.getType2());
         climate3T.setText(todayWeather.getType3());
