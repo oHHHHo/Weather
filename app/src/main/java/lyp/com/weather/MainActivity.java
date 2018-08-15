@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //todayweather
     // 城市 发布时间 湿度 周几 pm数据 空气质量 温度 天气状况 风力
     private TextView cityT, timeT, weekT, windT, weatherInfo;
-    private ImageView weatherImg;
 
     //future
     private TextView week1T, temperature1T, climate1T, wind1T, week2T, temperature2T, climate2T, wind2T,
@@ -106,7 +105,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         weekT = findViewById(R.id.today_week);
 //        windT = findViewById(R.id.todayinfo1_wind);
         weatherInfo = findViewById(R.id.weather_info);
-        weatherImg = findViewById(R.id.todayinfo1_weatherStatusImg);
 
         cityT.setText("N/A");
         timeT.setText("N/A");
@@ -372,77 +370,76 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mCircleDial.setAngle(nowTemp);
         mCircleDial.setMinMaxTem(lowTemp, highTemp);
         mCircleDial.setCenterTemper(nowTemp);
-        mCircleDial.setWeatherImg(((BitmapDrawable)getResources().getDrawable(R.drawable.qing)).getBitmap());
 
-        Toast.makeText(MainActivity.this,"更新成功",Toast.LENGTH_SHORT).show();
-
-        /*if (todayWeather.getType() != null) {
+        if (todayWeather.getType() != null) {
+            int weatherImg = 0;
             Log.d("type", todayWeather.getType());
             switch (todayWeather.getType()) {
                 case "晴":
-                    weatherImg.setImageResource(R.drawable.biz_plugin_weather_qing);
+                    weatherImg = R.drawable.biz_plugin_weather_qing;
                     break;
                 case "阴":
-                    weatherImg.setImageResource(R.drawable.biz_plugin_weather_yin);
+                    weatherImg = R.drawable.biz_plugin_weather_yin;
                     break;
                 case "雾":
-                    weatherImg.setImageResource(R.drawable.biz_plugin_weather_wu);
+                    weatherImg = R.drawable.biz_plugin_weather_wu;
                     break;
                 case "多云":
-                    weatherImg.setImageResource(R.drawable.biz_plugin_weather_duoyun);
+                    weatherImg = R.drawable.biz_plugin_weather_duoyun;
                     break;
                 case "小雨":
-                    weatherImg.setImageResource(R.drawable.biz_plugin_weather_xiaoyu);
+                    weatherImg = R.drawable.biz_plugin_weather_xiaoyu;
                     break;
                 case "中雨":
-                    weatherImg.setImageResource(R.drawable.biz_plugin_weather_zhongyu);
+                    weatherImg = R.drawable.biz_plugin_weather_zhongyu;
                     break;
                 case "大雨":
-                    weatherImg.setImageResource(R.drawable.biz_plugin_weather_dayu);
+                    weatherImg = R.drawable.biz_plugin_weather_dayu;
                     break;
                 case "阵雨":
-                    weatherImg.setImageResource(R.drawable.biz_plugin_weather_zhenyu);
+                    weatherImg = R.drawable.biz_plugin_weather_zhenyu;
                     break;
                 case "雷阵雨":
-                    weatherImg.setImageResource(R.drawable.biz_plugin_weather_leizhenyu);
+                    weatherImg = R.drawable.biz_plugin_weather_leizhenyu;
                     break;
                 case "雷阵雨加暴":
-                    weatherImg.setImageResource(R.drawable.biz_plugin_weather_leizhenyubingbao);
+                    weatherImg = R.drawable.biz_plugin_weather_leizhenyubingbao;
                     break;
                 case "暴雨":
-                    weatherImg.setImageResource(R.drawable.biz_plugin_weather_baoyu);
+                    weatherImg = R.drawable.biz_plugin_weather_baoyu;
                     break;
                 case "大暴雨":
-                    weatherImg.setImageResource(R.drawable.biz_plugin_weather_dabaoyu);
+                    weatherImg = R.drawable.biz_plugin_weather_dabaoyu;
                     break;
                 case "特大暴雨":
-                    weatherImg.setImageResource(R.drawable.biz_plugin_weather_tedabaoyu);
+                    weatherImg = R.drawable.biz_plugin_weather_tedabaoyu;
                     break;
                 case "阵雪":
-                    weatherImg.setImageResource(R.drawable.biz_plugin_weather_zhenxue);
+                    weatherImg = R.drawable.biz_plugin_weather_zhenxue;
                     break;
                 case "暴雪":
-                    weatherImg.setImageResource(R.drawable.biz_plugin_weather_baoxue);
+                    weatherImg = R.drawable.biz_plugin_weather_baoxue;
                     break;
                 case "大雪":
-                    weatherImg.setImageResource(R.drawable.biz_plugin_weather_daxue);
+                    weatherImg = R.drawable.biz_plugin_weather_daxue;
                     break;
                 case "小雪":
-                    weatherImg.setImageResource(R.drawable.biz_plugin_weather_xiaoxue);
+                    weatherImg = R.drawable.biz_plugin_weather_xiaoxue;
                     break;
                 case "雨夹雪":
-                    weatherImg.setImageResource(R.drawable.biz_plugin_weather_yujiaxue);
+                    weatherImg = R.drawable.biz_plugin_weather_yujiaxue;
                     break;
                 case "中雪":
-                    weatherImg.setImageResource(R.drawable.biz_plugin_weather_zhongxue);
+                    weatherImg = R.drawable.biz_plugin_weather_zhongxue;
                     break;
                 case "沙尘暴":
-                    weatherImg.setImageResource(R.drawable.biz_plugin_weather_shachenbao);
+                    weatherImg = R.drawable.biz_plugin_weather_shachenbao;
                     break;
                 default:
                     break;
             }
-        }*/
+            mCircleDial.setWeatherImg(((BitmapDrawable)getResources().getDrawable(weatherImg)).getBitmap());
+        }
 
         week1T.setText(todayWeather.getDate1());
         week2T.setText(todayWeather.getDate2());
@@ -472,8 +469,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
                 default:
                     break;
-
-
             }
         }
     }

@@ -5,6 +5,7 @@ package lyp.com.weather.util;
         import android.graphics.Bitmap;
         import android.graphics.Canvas;
         import android.graphics.Color;
+        import android.graphics.Matrix;
         import android.graphics.Paint;
         import android.graphics.Shader;
         import android.graphics.SweepGradient;
@@ -267,9 +268,17 @@ public class CircleDial extends View {
 
     private void drawWeather(Canvas canvas) {
         if (weatherImg != null) {
-            bitWidth = weatherImg.getWidth();
-            bitHeight = weatherImg.getHeight();
-            canvas.drawBitmap(weatherImg, centerX - (bitWidth/2), centerY + r - (bitHeight*2/3), null);
+            // Matrix类进行图片处理（缩小或者旋转）
+            Matrix matrix = new Matrix();
+            // 缩小一倍
+            matrix.postScale(0.4f, 0.4f);
+            // 生成新的图片
+            Bitmap dstbmp = Bitmap.createBitmap(weatherImg, 0, 0, weatherImg.getWidth(),
+                    weatherImg.getHeight(), matrix, true);
+            // 添加到canvas
+            bitWidth = weatherImg.getWidth() * 2 / 5;
+            bitHeight = weatherImg.getHeight() * 2 / 5;
+            canvas.drawBitmap(dstbmp, centerX - (bitWidth/2), centerY + r - (bitHeight*2/3), null);
         }
     }
 
