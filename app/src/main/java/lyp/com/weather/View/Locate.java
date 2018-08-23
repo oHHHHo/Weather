@@ -1,4 +1,4 @@
-package lyp.com.weather.util;
+package lyp.com.weather.View;
 
 import android.Manifest;
 import android.app.Activity;
@@ -29,9 +29,9 @@ import com.baidu.mapapi.model.LatLng;
 import java.util.ArrayList;
 import java.util.List;
 
-import lyp.com.weather.MyApplication;
+import lyp.com.weather.model.MyApplication;
 import lyp.com.weather.R;
-import lyp.com.weather.SelectCity;
+import lyp.com.weather.model.City;
 
 /**
  * Created by liyp on 18-8-6.

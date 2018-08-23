@@ -1,4 +1,4 @@
-package lyp.com.weather;
+package lyp.com.weather.util;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

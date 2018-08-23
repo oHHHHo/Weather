@@ -1,4 +1,4 @@
-package lyp.com.weather;
+package lyp.com.weather.model;
 
 import android.app.Application;
 import android.os.Environment;
@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-import lyp.com.weather.util.City;
+import lyp.com.weather.model.City;
 import lyp.com.weather.util.CityDB;
 
 /**

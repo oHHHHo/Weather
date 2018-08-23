@@ -1,4 +1,4 @@
-package lyp.com.weather;
+package lyp.com.weather.View;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -24,8 +24,10 @@ import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import lyp.com.weather.util.CheckNet;
+import lyp.com.weather.R;
+import lyp.com.weather.model.TodayWeather;
 import lyp.com.weather.util.CircleDial;
-import lyp.com.weather.util.Locate;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 

@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import lyp.com.weather.model.City;
+
 /**
  * Created by liyp on 18-8-3.
  */

@@ -1,4 +1,4 @@
-package lyp.com.weather;
+package lyp.com.weather.View;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -17,7 +17,9 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-import lyp.com.weather.util.City;
+import lyp.com.weather.model.MyApplication;
+import lyp.com.weather.R;
+import lyp.com.weather.model.City;
 
 /**
  * Created by liyp on 18-8-3.

@@ -30,7 +30,7 @@
     <uses-permission android:name="Manifest.permission.READ_PHONE_STATE"/>
 
     <application
-        android:name=".MyApplication"
+        android:name=".model.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -41,15 +41,15 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="Mtmf5UMcgG3QGqivFRNg7ddGIPiF0qey" >
         </meta-data>
-        <activity android:name=".MainActivity">
+        <activity android:name=".View.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SelectCity"/>
-        <activity android:name=".util.Locate"/>
+        <activity android:name=".View.SelectCity"/>
+        <activity android:name=".View.Locate"/>
         <service android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":remote">

@@ -1,4 +1,4 @@
-package lyp.com.weather.util;
+package lyp.com.weather.model;
 
 /**
  * Created by liyp on 18-8-3.
